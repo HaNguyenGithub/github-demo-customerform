@@ -1,15 +1,85 @@
 .App {
-    text-align: center;
-    background-color: #5972a5;
-    min-height: 100vh;
-  }
-  
-  .App-header {
-  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: calc(10px + 1vmin);
-    color: white;
-  }
+  text-align: center;
+  background-color: #5972a5;
+  min-height: 100vh;
+}
 
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 1vmin);
+  color: white;
+}
+
+.body {
+  height: fit-content;
+  width: 50%;
+  margin-left: 38%;
+  margin-right: 25%;
+  color: rgb(255, 255, 255);
+}
+
+.body .formSignUp {
+  display: flex;
+  flex-direction: column;
+}
+
+.text .element {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  text-align: left;
+  padding: 5px;
+}
+.radio .element {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 50%;
+  text-align: left;
+}
+.radio .element > label {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.select .element {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  text-align: left;
+}
+
+.select .element > label {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.checkBox .element {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  text-align: left;
+}
+
+.checkBox .element > label {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.submit {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  text-align: center;
+  justify-content: center;
+}
+
+.submit > button {
+  width: 100%;
+}

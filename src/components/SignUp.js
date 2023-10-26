@@ -80,20 +80,18 @@ function SignUp() {
                   id="doctor"
                   name="job"
                   value="doctor"
-                />{" "}
-                Student
+                />
                 <label htmlFor="doctor"> Doctor </label>
                 <input
                   type="checkbox"
                   id="teacher"
                   name="job"
                   value="doctor"
-                />{" "}
-                Student
+                />
                 <label htmlFor="teacher"> Teacher </label>
               </div>
             </div>
-            <div className="button">
+            <div className="submit">
               <button type="submit">Submit</button>
             </div>
           </form>
