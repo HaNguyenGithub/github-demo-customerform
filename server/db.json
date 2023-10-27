@@ -1,0 +1,38 @@
+{
+  "customers": [
+    {
+      "username": "hi",
+      "password": "123456789",
+      "email": "hi@gmail.com",
+      "gender": "male",
+      "city": "HaNoi",
+      "job": [
+        "doctor",
+        "student"
+      ],
+      "id": 1
+    },
+    {
+      "username": "David",
+      "password": "123456789",
+      "email": "david@gmail.com",
+      "gender": "male",
+      "city": "HaNoi",
+      "job": [
+        "student"
+      ],
+      "id": 2
+    },
+    {
+      "username": "Mary",
+      "password": "89567",
+      "email": "mary@gmail.com",
+      "gender": "male",
+      "city": "HoChiMinh",
+      "job": [
+        "doctor"
+      ],
+      "id": 3
+    }
+  ]
+}
