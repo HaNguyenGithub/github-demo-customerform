@@ -1,22 +1,14 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import "./SignUp.css";
 
-const initialFormState = {
-  username: "",
-  password: "",
-  email: "",
-  gender: "",
-  city: "",
-  job: [],
-};
+function SignUpRFH() {
+  const { register, handleSubmit } = useForm();
+  // const onSubmit = (data) => console.log(data);
 
-function SignUp() {
-  const [formSignUp, setFormSignUp] = useState(initialFormState);
-
-  const handleSubmitForm = (e) => {
-    addCustomer(formSignUp);
-    console.log(formSignUp);
-  };
+  const onSubmit = (customer) =>{
+      addCustomer(customer);
+      console.log(customer);
+  }
 
   const addCustomer = async (data) => {
     const response = fetch(`${process.env.REACT_APP_API_ENDPOINT}/customers`, {
@@ -28,32 +20,8 @@ function SignUp() {
     });
     if (response.ok) {
       alert("Successfully");
-      setFormSignUp(initialFormState);
     }
-  };
-
-  const handleChangeInput = (e) => {
-    const { name, value, type, checked } = e.target;
-    if (type === "checkbox") {
-      // Xử lý đầu vào checkbox
-      const updatedJobs = [...formSignUp.job];
-      if (checked) {
-        updatedJobs.push(value); // Thêm giá trị vào mảng
-      } else {
-        // Xóa giá trị khỏi mảng
-        const index = updatedJobs.indexOf(value);
-        if (index !== -1) {
-          updatedJobs.splice(index, 1);
-        }
-      }
-
-      // Cập nhật trạng thái formSignUp với mảng công việc mới
-      setFormSignUp({ ...formSignUp, [name]: updatedJobs });
-    } else {
-      // Xử lý các loại đầu vào khác
-      setFormSignUp({ ...formSignUp, [name]: value });
-    }
-  };
+  }; 
 
   return (
     <>
@@ -62,7 +30,7 @@ function SignUp() {
           <h1>Sign Up</h1>
         </header>
         <div className="body">
-          <form className="formSignUp" onSubmit={handleSubmitForm}>
+          <form className="formSignUp" onSubmit={handleSubmit(onSubmit)}>
             <div className="text">
               <div className="element">
                 <label htmlFor="username">Username:</label>
@@ -71,8 +39,8 @@ function SignUp() {
                   className="username"
                   name="username"
                   id="username"
-                  value={formSignUp.username}
-                  onChange={handleChangeInput}
+                  ref={register}
+                  {...register("username")}
                 />
               </div>
               <div className="element">
@@ -82,8 +50,7 @@ function SignUp() {
                   className="password"
                   name="password"
                   id="password"
-                  value={formSignUp.password}
-                  onChange={handleChangeInput}
+                  {...register("password",{ minLength: 8, maxLength: 25 })}
                 />
               </div>
               <div className="element">
@@ -93,8 +60,7 @@ function SignUp() {
                   className="email"
                   name="email"
                   id="email"
-                  value={formSignUp.email}
-                  onChange={handleChangeInput}
+                  {...register("email")}
                 />
               </div>
             </div>
@@ -108,7 +74,7 @@ function SignUp() {
                   name="gender"
                   id="male"
                   value={"male"}
-                  onChange={handleChangeInput}
+                  {...register("gender")}
                 />
                 <label htmlFor="female">Female</label>
                 <input
@@ -117,14 +83,14 @@ function SignUp() {
                   name="gender"
                   id="female"
                   value={"female"}
-                  onChange={handleChangeInput}
+                  {...register("gender")}
                 />
               </div>
             </div>
             <div className="select">
               <div className="element">
                 <label htmlFor="city">City:</label>
-                <select id="city" name="city" onChange={handleChangeInput}>
+                <select id="city" name="city" {...register("city")}>
                   <option value={""}>Choose a city</option>
                   <option value={"HaNoi"}>HaNoi</option>
                   <option value={"DaNang"}>DaNang</option>
@@ -140,24 +106,24 @@ function SignUp() {
                   type="checkbox"
                   id="JAVA"
                   name="job"
-                  value="student"
-                  onChange={handleChangeInput}
+                  value="java"
+                  {...register("job")}
                 />
                 <label htmlFor="JAVA"> Java </label>
                 <input
                   type="checkbox"
                   id="JS"
                   name="job"
-                  value="doctor"
-                  onChange={handleChangeInput}
+                  value="javascript"
+                  {...register("job")}
                 />
                 <label htmlFor="JS"> Javascript </label>
                 <input
                   type="checkbox"
                   id="PHP"
                   name="job"
-                  value="doctor"
-                  onChange={handleChangeInput}
+                  value="php"
+                  {...register("job")}
                 />
                 <label htmlFor="PHP"> PHP </label>
               </div>
@@ -172,4 +138,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpRFH;

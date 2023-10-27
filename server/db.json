@@ -33,6 +33,54 @@
         "doctor"
       ],
       "id": 3
+    },
+    {
+      "username": "test",
+      "password": "123456789",
+      "email": "test@gmail.com",
+      "gender": "male",
+      "city": "HaNoi",
+      "job": [
+        "student",
+        "doctor"
+      ],
+      "id": 8
+    },
+    {
+      "username": "testcase1",
+      "password": "123456789",
+      "email": "testcase1@gmail.com",
+      "gender": "female",
+      "city": "HaNoi",
+      "job": [
+        "student",
+        "doctor"
+      ],
+      "id": 9
+    },
+    {
+      "username": "testMinMax",
+      "password": "zxcfgbe",
+      "email": "test@gmail.com",
+      "gender": "female",
+      "city": "DaNang",
+      "job": [
+        "student",
+        "doctor"
+      ],
+      "id": 10
+    },
+    {
+      "username": "testMinMaxLeght",
+      "password": "zxcvbnm,.,mnbvcxzxcvbnm,.",
+      "email": "test@gmail.com",
+      "gender": "male",
+      "city": "HoChiMinh",
+      "job": [
+        "doctor",
+        "doctor"
+      ],
+      "id": 11
     }
   ]
 }
