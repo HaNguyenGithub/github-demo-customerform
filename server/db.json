@@ -81,6 +81,17 @@
         "doctor"
       ],
       "id": 11
+    },
+    {
+      "username": "testApp.test",
+      "password": "123456789",
+      "email": "test@gmal.com",
+      "gender": "male",
+      "city": "DaNang",
+      "job": [
+        "java"
+      ],
+      "id": 13
     }
   ]
 }
