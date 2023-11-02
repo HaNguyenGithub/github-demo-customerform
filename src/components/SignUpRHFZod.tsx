@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import "./SignUp.css";
 
 type customer = {
-  username: string,
+  username: string,s
   password: string,
   email: string,
   gender: string,
@@ -17,7 +17,7 @@ type customer = {
 const customerSchema = z.object({
   username: z.string().min(1,"This field is required"),
   password: z.string().min(8,"Password must at least 8 character(s)").max(15,"Password must contain at most 15 character(s)"),
-  email: z.string().email(),
+  email: z.string().min(1,"This field is required") .email(),
   // gender: z.string().nullable().refine((value) => value !== null, {
   //   message: "Gender is required",
   // }),
@@ -37,14 +37,14 @@ function SignUpRHFZod() {
     formState: { errors },
     setValue,
   } = useForm<customer>({   
-    // defaultValues: {
-    //       username: "",
-    //       password: "",
-    //       email: "",
-    //       gender: "",
-    //       city: "",
-    //       job: [],
-    //     },
+    defaultValues: {
+          username: "",
+          password: "",
+          email: "",
+          gender: "",
+          city: "",
+          job: [],
+        },
     resolver: zodResolver(customerSchema)});
   
   // useEffect(() => {
@@ -53,13 +53,13 @@ function SignUpRHFZod() {
   // }, []); // Sử dụng dependency array trống để đảm bảo chỉ chạy một lần
   
 
-  const onSubmit = (customerData: customer) => {
-    console.log("Form errors:", errors);
+  const onSubmit = (customerData: customer, e) => {
+    e.preventDefault();
     console.log("Submitted data:", customerData);
   }
 
+  // console.log(watch("job")); 
 
-console.log(watch("job")); 
   return (
     <>
       <div className="App">
