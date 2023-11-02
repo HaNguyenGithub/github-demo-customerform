@@ -7,7 +7,7 @@ import "./SignUp.css";
 
 type customer = {
   username: string,
-  password: string,
+  password: string,g
   email: string,
   gender: string,
   city: string,
