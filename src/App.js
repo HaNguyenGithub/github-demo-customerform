@@ -1,11 +1,11 @@
 // import "./App.css";
-import SignUp from "./components/SignUp";
-import SignUpRHF from "./components/SignUpRHF";
+import SignUpRHFZod from "./components/SignUpRHFZod.tsx";
+
 
 function App() {
   return (
     <>
-      <SignUpRHF />
+      <SignUpRHFZod />
     </>
   );
 }

@@ -1,52 +1,65 @@
+import React from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from 'yup';
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import "./SignUp.css";
-const customer = {
-  username: "",
-  password: "",
-  email: "",
-  gender: "",
-  city: "",
-  job: [],
-};
 
-const customerSchema = Yup.object({
-  username: Yup.string().required('This field is required'),
-  password: Yup.string().min(8).max(15).required('This field is required'),
-  email: Yup.string().required('This field is required').email("Syntax errors"),
-  gender: Yup.string().required('This field is required'),
-  city: Yup.string().required('This field is required'),
-  job: Yup.array().min(1,'At least one job'),
-});
+type customer = {
+  username: string,
+  password: string,
+  email: string,
+  gender: string,
+  city: string,
+  job: string[],
+} 
 
-function SignUpRFH() {
+const customerSchema = z.object({
+  username: z.string().min(1,"This field is required"),
+  password: z.string().min(8,"Password must at least 8 character(s)").max(15,"Password must contain at most 15 character(s)"),
+  email: z.string().email(),
+  // gender: z.string().nullable().refine((value) => value !== null, {
+  //   message: "Gender is required",
+  // }),
+  gender: z.string().min(1,"This field is required"),
+  city: z.string().min(1,"This field is required"),
+  // job: z.array(z.string()).refine((value) => value.length > 0, {message: "job is required"}),
+  job: z.array(z.string()).nonempty({message: "This field is required"}),
+  })
+
+// type Schema = z.infer<typeof customerSchema>
+
+function SignUpRHFZod() {  
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
-  } = useForm({resolver: yupResolver(customerSchema), defaultValues:customer});
-  // const onSubmit = (data) => console.log(data);
-
+    setValue,
+  } = useForm<customer>({   
+    // defaultValues: {
+    //       username: "",
+    //       password: "",
+    //       email: "",
+    //       gender: "",
+    //       city: "",
+    //       job: [],
+    //     },
+    resolver: zodResolver(customerSchema)});
   
-  const onSubmit = (customer) => {
-    addCustomer(customer);
-    console.log(customer);
-  };
+  // useEffect(() => {
+  //   // Đặt giá trị mặc định cho trường "job" là mảng rỗng
+  //   setValue("job", []);
+  // }, []); // Sử dụng dependency array trống để đảm bảo chỉ chạy một lần
+  
 
-  const addCustomer = async (data) => {
-    const response = fetch(`${process.env.REACT_APP_API_ENDPOINT}/customers`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    if (response.ok) {
-      alert("Successfully");
-    }
-  };
+  const onSubmit = (customerData: customer) => {
+    console.log("Form errors:", errors);
+    console.log("Submitted data:", customerData);
+  }
 
+
+console.log(watch("job")); 
   return (
     <>
       <div className="App">
@@ -57,74 +70,64 @@ function SignUpRFH() {
           <form className="formSignUp" onSubmit={handleSubmit(onSubmit)}>
             <div className="text">
               <div className="element">
-                <label htmlFor="username">Username:</label>
+                <label >Username:</label>
                 <input
                   type="text"
                   className="username"
-                  name="username"
                   id="username"
-                  ref={register}
                   {...register("username")}
                 />
               </div>
               <div className="errors-message">
-                {errors.username?.message}
+              {errors.username && <span> {errors.username.message}</span>}
               </div>
               <div className="element">
                 <label htmlFor="password">Password:</label>
                 <input
                   type="password"
                   className="password"
-                  name="password"
                   id="password"
-                  ref={register}
                   {...register("password")}
                 />
               </div>
               <div className="errors-message">
-                {errors.password?.message}
+              {errors.password && <span> {errors.password.message}</span>}
               </div>
               <div className="element">
                 <label htmlFor="email">Email:</label>
                 <input
                   type="email"
                   className="email"
-                  name="email"
                   id="email"
-                  ref={register}
                   {...register("email")}
                 />
               </div>
               <div className="errors-message">
-                {errors.email?.message}
+              {errors.email && <span> {errors.email.message}</span>}
               </div>
             </div>
             <div className="radio">
               <div className="element">
                 <label>Gender:</label>
-
                 <input
                   type="radio"
                   className="gender"
-                  name="gender"
                   id="male"
-                  value={"male"}
+                  value="male"
                   {...register("gender")}
                 />
                 <label htmlFor="male">Male</label>
-
                 <input
                   type="radio"
                   className="gender"
-                  name="gender"
                   id="female"
-                  value={"female"}
+                  value="female"
                   {...register("gender")}
                 />
                 <label htmlFor="female">Female</label>
               </div>
               <div className="errors-message">
-                {errors.gender?.message}
+              {errors.gender && <span> {errors.gender.message}</span>}
               </div>
             </div>
             <div className="select">
@@ -132,7 +135,6 @@ function SignUpRFH() {
                 <label htmlFor="city">City:</label>
                 <select
                   id="city"
-                  name="city"
                   {...register("city")}
                 >
                   <option value={""}>Choose a city</option>
@@ -143,7 +145,7 @@ function SignUpRFH() {
                 </select>
               </div>
               <div className="errors-message">
-                {errors.city?.message}
+              {errors.city && <span> {errors.city.message}</span>}
               </div>
             </div>
             <div className="checkBox">
@@ -152,15 +154,14 @@ function SignUpRFH() {
                 <input
                   type="checkbox"
                   id="JAVA"
-                  name="job"
                   value="java"
+
                   {...register("job")}
                 />
                 <label htmlFor="JAVA"> Java </label>
                 <input
                   type="checkbox"
                   id="JS"
-                  name="job"
                   value="javascript"
                   {...register("job")}
                 />
@@ -168,17 +169,15 @@ function SignUpRFH() {
                 <input
                   type="checkbox"
                   id="PHP"
-                  name="job"
                   value="php"
                   {...register("job")}
                 />
                 <label htmlFor="PHP"> PHP </label>
               </div>
               <div className="errors-message">
-                {errors.job?.message}
+              {errors.job && <span> {errors.job.message}</span>}
               </div>
             </div>
-            
             <div className="submit">
               <button type="submit">Submit</button>
             </div>
@@ -189,4 +188,4 @@ function SignUpRFH() {
   );
 }
 
-export default SignUpRFH;
+export default SignUpRHFZod;

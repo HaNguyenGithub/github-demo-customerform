@@ -32,6 +32,12 @@
   text-align: left;
   padding: 5px;
 }
+
+.text .element > label {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .radio .element {
   padding-top: 5px;
   padding-bottom: 5px;
@@ -82,4 +88,13 @@
 
 .submit > button {
   width: 100%;
+}
+
+.errors-message {
+  color: rgb(255, 0, 0);
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+  font-style: italic;
 }

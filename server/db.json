@@ -92,6 +92,18 @@
         "java"
       ],
       "id": 13
+    },
+    {
+      "username": "H_Nguyen_2K",
+      "password": "12345467898",
+      "email": "270297vh@gmail.com",
+      "gender": "male",
+      "city": "HaNoi",
+      "job": [
+        "java",
+        "javascript"
+      ],
+      "id": 20
     }
   ]
 }
