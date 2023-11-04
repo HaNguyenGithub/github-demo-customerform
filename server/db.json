@@ -8,7 +8,7 @@
     "password": "$2a$04$Z990hFV/w9X4s34rjVqc6OGBhsMUcfiH.MXgixQcOmOh.qGIwy88S",
     "gender": "Female",
     "city": "Fuxing",
-    "job": ["GIS Technical Architect", "Teacher"]
+    "job": ["GIS Technical Architect", "Teacher", "Student"]
   }, {
     "id": 2,
     "username": "scallar1",
