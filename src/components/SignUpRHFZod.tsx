@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import "./SignUp.css";
 
 type customer = {
-  username: string,s
+  username: string,
   password: string,
   email: string,
   gender: string,
@@ -14,18 +14,15 @@ type customer = {
   job: string[],
 } 
 
+
 const customerSchema = z.object({
   username: z.string().min(1,"This field is required"),
   password: z.string().min(8,"Password must at least 8 character(s)").max(15,"Password must contain at most 15 character(s)"),
   email: z.string().min(1,"This field is required") .email(),
-  // gender: z.string().nullable().refine((value) => value !== null, {
-  //   message: "Gender is required",
-  // }),
   gender: z.string().min(1,"This field is required"),
   city: z.string().min(1,"This field is required"),
-  // job: z.array(z.string()).refine((value) => value.length > 0, {message: "job is required"}),
   job: z.array(z.string()).nonempty({message: "This field is required"}),
-  })
+  });
 
 // type Schema = z.infer<typeof customerSchema>
 
@@ -189,3 +186,16 @@ function SignUpRHFZod() {
 }
 
 export default SignUpRHFZod;
+
+// const customerSchema = z.object({
+//   username: z.string().min(1,"This field is required"),
+//   password: z.string().min(8,"Password must at least 8 character(s)").max(15,"Password must contain at most 15 character(s)"),
+//   email: z.string().min(1,"This field is required") .email(),
+//   // gender: z.string().nullable().refine((value) => value !== null, {
+//   //   message: "Gender is required",
+//   // }),
+//   gender: z.string().min(1,"This field is required"),
+//   city: z.string().min(1,"This field is required"),
+//   // job: z.array(z.string()).refine((value) => value.length > 0, {message: "job is required"}),
+//   job: z.array(z.string()).nonempty({message: "This field is required"}),
+//   })
